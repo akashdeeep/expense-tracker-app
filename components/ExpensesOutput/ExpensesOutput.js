@@ -37,7 +37,7 @@ export default ExpensesOutput = (props) => {
 				expenses={DUMMY_EXPENSES}
 				periodName={props.expensePeriod}
 			/>
-			<ExpensesList />
+			<ExpensesList expenses={DUMMY_EXPENSES} />
 		</View>
 	);
 };

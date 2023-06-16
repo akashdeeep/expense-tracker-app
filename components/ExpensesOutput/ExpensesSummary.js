@@ -7,7 +7,7 @@ export default ExpensesSummary = (props) => {
 	return (
 		<View>
 			<Text>
-				{props.periodName} Expenses: {expenseSum.toFixed(2)}
+				{props.periodName} Expenses: ₹{expenseSum.toFixed(2)}
 			</Text>
 		</View>
 	);
