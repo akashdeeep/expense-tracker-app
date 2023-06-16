@@ -10,6 +10,7 @@ import RecentExpenses from "./screens/RecentExpenses";
 import AllExpenses from "./screens/AllExpenses";
 
 import { GlobalStyles } from "./constants/GlobalStyles";
+import IconButton from "./components/UI/IconButton";
 
 const Stack = createNativeStackNavigator();
 const BottomTabs = createBottomTabNavigator();
@@ -22,13 +23,14 @@ ExpensesOverview = (props) => {
 				headerTintColor: GlobalStyles.colors.primary50,
 				tabBarStyle: { backgroundColor: GlobalStyles.colors.primary800 },
 				tabBarActiveTintColor: GlobalStyles.colors.primary50,
-				headerRight: () => (
-					<Ionicons
+				headerRight: ({ tintColor }) => (
+					<IconButton
 						name="add-outline"
-						size={24}
-						color={GlobalStyles.colors.primary50}
-						style={{ marginRight: 10 }}
-						onPress={() => props.navigation.navigate("ManageExpense")}
+						size={30}
+						color={tintColor}
+						onPress={() => {
+							console.log("Add Expense");
+						}}
 					/>
 				),
 			}}>
