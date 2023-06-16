@@ -7,25 +7,49 @@ import { GlobalStyles } from "../../constants/GlobalStyles";
 const DUMMY_EXPENSES = [
 	{
 		id: "e1",
-		name: "Toilet Paper",
+		description: "Toilet Paper",
 		amount: 94.12,
 		date: new Date(2020, 7, 14),
 	},
 	{
 		id: "e2",
-		name: "New TV",
+		description: "New TV",
 		amount: 799.49,
 		date: new Date(2021, 2, 12),
 	},
 	{
 		id: "e3",
-		name: "Car Insurance",
+		description: "Car Insurance",
 		amount: 294.67,
 		date: new Date(2023, 6, 11),
 	},
 	{
 		id: "e4",
-		name: "New Desk (Wooden)",
+		description: "New Desk (Wooden)",
+		amount: 450,
+		date: new Date(2023, 6, 12),
+	},
+	{
+		id: "e5",
+		description: "Toilet Paper",
+		amount: 94.12,
+		date: new Date(2020, 7, 14),
+	},
+	{
+		id: "e6",
+		description: "New TV",
+		amount: 799.49,
+		date: new Date(2021, 2, 12),
+	},
+	{
+		id: "e8",
+		description: "Car Insurance",
+		amount: 294.67,
+		date: new Date(2023, 6, 11),
+	},
+	{
+		id: "e9",
+		description: "New Desk (Wooden)",
 		amount: 450,
 		date: new Date(2023, 6, 12),
 	},
@@ -45,7 +69,8 @@ export default ExpensesOutput = (props) => {
 
 const styles = StyleSheet.create({
 	container: {
-		padding: 10,
+		paddingTop: 10,
+		paddingHorizontal: 10,
 		backgroundColor: GlobalStyles.colors.primary900,
 		flex: 1,
 	},

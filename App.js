@@ -22,6 +22,15 @@ ExpensesOverview = (props) => {
 				headerTintColor: GlobalStyles.colors.primary50,
 				tabBarStyle: { backgroundColor: GlobalStyles.colors.primary800 },
 				tabBarActiveTintColor: GlobalStyles.colors.primary50,
+				headerRight: () => (
+					<Ionicons
+						name="add-outline"
+						size={24}
+						color={GlobalStyles.colors.primary50}
+						style={{ marginRight: 10 }}
+						onPress={() => props.navigation.navigate("ManageExpense")}
+					/>
+				),
 			}}>
 			<BottomTabs.Screen
 				name="RecentExpenses"
