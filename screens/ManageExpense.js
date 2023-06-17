@@ -3,10 +3,13 @@ import { useLayoutEffect } from "react";
 import IconButton from "../components/UI/IconButton";
 import Button from "../components/UI/Button";
 import { GlobalStyles } from "../constants/GlobalStyles";
+import { useContext } from "react";
+import { ExpensesContext } from "../store/expenses-context";
 
 export default ManageExpenses = (props) => {
 	const editedExpenseId = props.route.params?.expenseId;
 	const isEditing = !!editedExpenseId;
+	const expensesCtx = useContext(ExpensesContext);
 
 	useLayoutEffect(() => {
 		props.navigation.setOptions({
@@ -18,9 +21,24 @@ export default ManageExpenses = (props) => {
 		props.navigation.goBack();
 	};
 	confirmHandler = () => {
+		if (isEditing) {
+			expensesCtx.updateExpense(editedExpenseId, {
+				description: "Test",
+				amount: 12.99,
+				date: new Date(),
+			});
+		} else {
+			expensesCtx.addExpense({
+				id: new Date().toString() + Math.random(),
+				description: "Test",
+				amount: 12.99,
+				date: new Date(),
+			});
+		}
 		props.navigation.goBack();
 	};
 	deleteHandler = () => {
+		expensesCtx.deleteExpense(editedExpenseId);
 		props.navigation.goBack();
 	};
 
