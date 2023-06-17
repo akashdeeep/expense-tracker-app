@@ -14,14 +14,14 @@ export default ManageExpenses = (props) => {
 		});
 	}, [props.navigation, isEditing]);
 
-	const cancelHandler = () => {
-		props.navigation.navigate("AllExpenses");
+	cancelHandler = () => {
+		props.navigation.goBack();
 	};
 	confirmHandler = () => {
-		props.navigation.navigate("AllExpenses");
+		props.navigation.goBack();
 	};
 	deleteHandler = () => {
-		props.navigation.navigate("AllExpenses");
+		props.navigation.goBack();
 	};
 
 	return (
