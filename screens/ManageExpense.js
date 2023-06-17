@@ -1,6 +1,7 @@
 import { View, Text, StyleSheet } from "react-native";
 import { useLayoutEffect } from "react";
 import IconButton from "../components/UI/IconButton";
+import Button from "../components/UI/Button";
 import { GlobalStyles } from "../constants/GlobalStyles";
 
 export default ManageExpenses = (props) => {
@@ -13,17 +14,34 @@ export default ManageExpenses = (props) => {
 		});
 	}, [props.navigation, isEditing]);
 
+	const cancelHandler = () => {
+		props.navigation.navigate("AllExpenses");
+	};
+	confirmHandler = () => {
+		props.navigation.navigate("AllExpenses");
+	};
+	deleteHandler = () => {
+		props.navigation.navigate("AllExpenses");
+	};
+
 	return (
 		<View style={styles.container}>
+			<View style={styles.buttonContainer}>
+				<Button style={styles.button} mode="flat" onPress={cancelHandler}>
+					Cancel
+				</Button>
+				<Button style={styles.button} onPress={confirmHandler}>
+					{isEditing ? "Update" : "Add"}
+				</Button>
+			</View>
+
 			{isEditing && (
 				<View style={styles.deleteContainer}>
 					<IconButton
 						name="trash-outline"
 						size={30}
 						color={GlobalStyles.colors.error400}
-						onPress={() => {
-							props.navigation.navigate("AllExpenses");
-						}}
+						onPress={deleteHandler}
 					/>
 				</View>
 			)}
@@ -43,5 +61,14 @@ const styles = StyleSheet.create({
 		borderTopWidth: 1,
 		borderTopColor: GlobalStyles.colors.primary50,
 		alignItems: "center",
+	},
+	buttonContainer: {
+		flexDirection: "row",
+		justifyContent: "center",
+		alignItems: "center",
+	},
+	button: {
+		minWidth: 100,
+		marginHorizontal: 10,
 	},
 });
