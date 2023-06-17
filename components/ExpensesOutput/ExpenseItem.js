@@ -6,7 +6,13 @@ import { useNavigation } from "@react-navigation/native";
 export default ExpenseItem = (props) => {
 	const navigation = useNavigation();
 	expensePressedHandler = () => {
-		navigation.navigate("ManageExpense");
+		navigation.navigate("ManageExpense", {
+			expenseId: props.id,
+			expenseDescription: props.description,
+			expenseAmount: props.amount,
+			// expenseDate: props.date,
+		});
+		console.log(props.date);
 	};
 
 	return (
