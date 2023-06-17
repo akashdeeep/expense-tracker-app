@@ -10,7 +10,7 @@ export default ExpenseItem = (props) => {
 			expenseId: props.id,
 			expenseDescription: props.description,
 			expenseAmount: props.amount,
-			// expenseDate: props.date,
+			expenseDate: props.date, // gives warning of non-serializable value
 		});
 		console.log(props.date);
 	};
