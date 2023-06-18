@@ -1,10 +1,11 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, TextInput } from "react-native";
 import { useLayoutEffect } from "react";
 import IconButton from "../components/UI/IconButton";
 import Button from "../components/UI/Button";
 import { GlobalStyles } from "../constants/GlobalStyles";
 import { useContext } from "react";
 import { ExpensesContext } from "../store/expenses-context";
+import ExpenseForm from "../components/ManageExpense/ExpenseForm";
 
 export default ManageExpenses = (props) => {
 	const editedExpenseId = props.route.params?.expenseId;
@@ -44,6 +45,7 @@ export default ManageExpenses = (props) => {
 
 	return (
 		<View style={styles.container}>
+			<ExpenseForm />
 			<View style={styles.buttonContainer}>
 				<Button style={styles.button} mode="flat" onPress={cancelHandler}>
 					Cancel
