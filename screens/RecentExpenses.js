@@ -14,6 +14,10 @@ export default RecentExpenses = (props) => {
 	});
 
 	return (
-		<ExpensesOutput expensePeriod="Last 7 Days" expenses={RecentExpenses} />
+		<ExpensesOutput
+			expensePeriod="Last 7 Days"
+			expenses={RecentExpenses}
+			fallbackText="No expenses registered for the last 7 days"
+		/>
 	);
 };
