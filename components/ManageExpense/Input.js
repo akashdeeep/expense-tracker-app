@@ -4,9 +4,9 @@ import { GlobalStyles } from "../../constants/GlobalStyles";
 
 export default Input = (props) => {
 	return (
-		<View>
-			<Text> {props.label}</Text>
-			<TextInput {...props.textInputConfig} />
+		<View style={[styles.inputContainer, props.style]}>
+			<Text style={styles.label}> {props.label}</Text>
+			<TextInput style={styles.input} {...props.textInputConfig} />
 		</View>
 	);
 };
@@ -19,6 +19,14 @@ styles = StyleSheet.create({
 	label: {
 		fontSize: 18,
 		marginBottom: 5,
-		color: GlobalStyles.colors.primary800,
+		color: GlobalStyles.colors.primary50,
+	},
+	input: {
+		borderBottomColor: GlobalStyles.colors.primary50,
+		borderBottomWidth: 1,
+		paddingVertical: 2,
+		paddingHorizontal: 5,
+		color: GlobalStyles.colors.primary50,
+		backgroundColor: GlobalStyles.colors.primary900,
 	},
 });
