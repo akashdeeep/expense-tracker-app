@@ -4,18 +4,35 @@ import { GlobalStyles } from "../../constants/GlobalStyles";
 import Input from "./Input";
 
 export default ExpenseForm = (props) => {
-	const [description, setDescription] = useState("");
-	const [amount, setAmount] = useState("");
-	const [date, setDate] = useState("");
+	const [inputValues, setInputValues] = useState({
+		amount: "",
+		date: "",
+		description: "",
+	});
 
-	const descriptionChangeHandler = (text) => {
-		setDescription(text);
-	};
-	const amountChangeHandler = (text) => {
-		setAmount(text);
-	};
-	const dateChangeHandler = (text) => {
-		setDate(text);
+	const [isFocused, setIsFocused] = useState({
+		amount: false,
+		date: false,
+		description: false,
+	});
+
+	const [isBlurred, setIsBlurred] = useState({
+		amount: false,
+		date: false,
+		description: false,
+	});
+
+	const [isTouched, setIsTouched] = useState({
+		amount: false,
+		date: false,
+		description: false,
+	});
+
+	inputChangeHandler = (inputIdentifier, inputValue) => {
+		setInputValues((prevState) => ({
+			...prevState,
+			[inputIdentifier]: inputValue,
+		}));
 	};
 
 	return (
@@ -26,8 +43,8 @@ export default ExpenseForm = (props) => {
 					style={styles.rowInput}
 					label="Amount"
 					textInputConfig={{
-						value: amount,
-						onChangeText: amountChangeHandler,
+						value: inputValues.amount,
+						onChangeText: inputChangeHandler.bind(this, "amount"),
 						placeholder: "0",
 					}}
 				/>
@@ -35,8 +52,8 @@ export default ExpenseForm = (props) => {
 					style={styles.rowInput}
 					label="Date"
 					textInputConfig={{
-						value: date,
-						onChangeText: dateChangeHandler,
+						value: inputValues.date,
+						onChangeText: inputChangeHandler.bind(this, "date"),
 						placeholder: "DD/MM/YYYY",
 						maxLength: 10,
 					}}
@@ -47,8 +64,8 @@ export default ExpenseForm = (props) => {
 					style={styles.rowInput}
 					label="Description"
 					textInputConfig={{
-						value: description,
-						onChangeText: descriptionChangeHandler,
+						value: inputValues.description,
+						onChangeText: inputChangeHandler.bind(this, "description"),
 						multiline: true,
 						numberOfLines: 4,
 					}}
