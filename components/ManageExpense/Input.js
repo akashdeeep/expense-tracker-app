@@ -1,32 +1,42 @@
-import { useState } from "react";
+import { useState, useLayoutEffect } from "react";
 import { View, StyleSheet, TextInput, Text } from "react-native";
 import { GlobalStyles } from "../../constants/GlobalStyles";
 
-export default Input = (props) => {
+function Input(props) {
+	let inputStyles = [styles.input];
+	if (props.textInputConfig && props.textInputConfig.multiline) {
+		inputStyles.push(styles.multilineInput);
+	}
+	console.log(props.style, styles2);
 	return (
-		<View style={[styles.inputContainer, props.style]}>
-			<Text style={styles.label}> {props.label}</Text>
-			<TextInput style={styles.input} {...props.textInputConfig} />
+		<View style={[styles2.inputContainer, props.style]}>
+			<Text style={styles2.label}>{props.label}</Text>
+			<TextInput style={styles2.input} {...props.textInputConfig} />
 		</View>
 	);
-};
+}
 
-styles = StyleSheet.create({
+export default Input;
+
+styles2 = StyleSheet.create({
 	inputContainer: {
-		marginVertical: 10,
-		marginHorizontal: 20,
+		marginBottom: 20,
 	},
 	label: {
-		fontSize: 18,
-		marginBottom: 5,
+		fontSize: 16,
 		color: GlobalStyles.colors.primary50,
+		marginBottom: 5,
 	},
 	input: {
-		borderBottomColor: GlobalStyles.colors.primary50,
 		borderBottomWidth: 1,
-		paddingVertical: 2,
-		paddingHorizontal: 5,
+		borderBottomColor: GlobalStyles.colors.primary50,
+		paddingVertical: 5,
+		paddingHorizontal: 2,
+		fontSize: 16,
 		color: GlobalStyles.colors.primary50,
 		backgroundColor: GlobalStyles.colors.primary900,
+	},
+	multilineInput: {
+		height: 100,
 	},
 });

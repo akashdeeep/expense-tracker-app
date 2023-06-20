@@ -4,41 +4,56 @@ import { GlobalStyles } from "../../constants/GlobalStyles";
 import Input from "./Input";
 
 export default ExpenseForm = (props) => {
-	amountChangeHandler = () => {};
+	const [description, setDescription] = useState("");
+	const [amount, setAmount] = useState("");
+	const [date, setDate] = useState("");
+
+	const descriptionChangeHandler = (text) => {
+		setDescription(text);
+	};
+	const amountChangeHandler = (text) => {
+		setAmount(text);
+	};
+	const dateChangeHandler = (text) => {
+		setDate(text);
+	};
 
 	return (
 		<View style={styles.form}>
-			<Text style={styles.title}>Your Expense</Text>
-			<View style={styles.inputsRow}>
+			<Text style={styles.title}>Add Expense</Text>
+			<View style={styles.inputRow}>
 				<Input
 					style={styles.rowInput}
 					label="Amount"
 					textInputConfig={{
-						keyboardType: "numeric",
-						placeholder: "0",
+						value: amount,
 						onChangeText: amountChangeHandler,
+						placeholder: "0",
 					}}
 				/>
 				<Input
 					style={styles.rowInput}
 					label="Date"
 					textInputConfig={{
+						value: date,
+						onChangeText: dateChangeHandler,
 						placeholder: "DD/MM/YYYY",
-						// keyboardType: "numeric",
 						maxLength: 10,
-						onChangeText: () => {},
 					}}
 				/>
 			</View>
-
-			<Input
-				label="Description"
-				textInputConfig={{
-					autoCapitalize: "sentences",
-					multiline: true,
-					numberOfLines: 3,
-				}}
-			/>
+			<View style={styles.inputRow}>
+				<Input
+					style={styles.rowInput}
+					label="Description"
+					textInputConfig={{
+						value: description,
+						onChangeText: descriptionChangeHandler,
+						multiline: true,
+						numberOfLines: 4,
+					}}
+				/>
+			</View>
 		</View>
 	);
 };
@@ -56,12 +71,10 @@ styles = StyleSheet.create({
 		textAlign: "center",
 		marginVertical: 10,
 	},
-	inputsRow: {
+	inputRow: {
 		flexDirection: "row",
 		justifyContent: "space-between",
-		alignItems: "center",
 		paddingHorizontal: 20,
-		paddingVertical: 10,
 	},
 	rowInput: {
 		flex: 1,
