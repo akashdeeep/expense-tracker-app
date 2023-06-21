@@ -19,6 +19,7 @@ export default ManageExpenses = (props) => {
 	}, [props.navigation, isEditing]);
 
 	cancelHandler = () => {
+		console.log("Cancel");
 		props.navigation.goBack();
 	};
 	confirmHandler = () => {
@@ -45,15 +46,10 @@ export default ManageExpenses = (props) => {
 
 	return (
 		<View style={styles.container}>
-			<ExpenseForm />
-			<View style={styles.buttonContainer}>
-				<Button style={styles.button} mode="flat" onPress={cancelHandler}>
-					Cancel
-				</Button>
-				<Button style={styles.button} onPress={confirmHandler}>
-					{isEditing ? "Update" : "Add"}
-				</Button>
-			</View>
+			<ExpenseForm
+				onCancel={cancelHandler}
+				submitButtonLabel={isEditing ? "Update" : "Add"}
+			/>
 
 			{isEditing && (
 				<View style={styles.deleteContainer}>
@@ -81,14 +77,5 @@ const styles = StyleSheet.create({
 		borderTopWidth: 1,
 		borderTopColor: GlobalStyles.colors.primary50,
 		alignItems: "center",
-	},
-	buttonContainer: {
-		flexDirection: "row",
-		justifyContent: "center",
-		alignItems: "center",
-	},
-	button: {
-		minWidth: 100,
-		marginHorizontal: 10,
 	},
 });

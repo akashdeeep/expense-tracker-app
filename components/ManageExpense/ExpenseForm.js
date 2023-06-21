@@ -2,8 +2,10 @@ import { useState, useLayoutEffect } from "react";
 import { View, StyleSheet, TextInput, Text } from "react-native";
 import { GlobalStyles } from "../../constants/GlobalStyles";
 import Input from "./Input";
+import Button from "../UI/Button";
 
 export default ExpenseForm = (props) => {
+	// console.log(props);
 	const [inputValues, setInputValues] = useState({
 		amount: "",
 		date: "",
@@ -33,6 +35,9 @@ export default ExpenseForm = (props) => {
 			...prevState,
 			[inputIdentifier]: inputValue,
 		}));
+	};
+	submitHandler = () => {
+		console.log(inputValues);
 	};
 
 	return (
@@ -71,6 +76,14 @@ export default ExpenseForm = (props) => {
 					}}
 				/>
 			</View>
+			<View style={styles.buttonContainer}>
+				<Button style={styles.button} mode="flat" onPress={props.onCancel}>
+					Cancel
+				</Button>
+				<Button style={styles.button} onPress={submitHandler}>
+					{props.submitButtonLabel}
+				</Button>
+			</View>
 		</View>
 	);
 };
@@ -95,6 +108,15 @@ styles = StyleSheet.create({
 	},
 	rowInput: {
 		flex: 1,
+		marginHorizontal: 10,
+	},
+	buttonContainer: {
+		flexDirection: "row",
+		justifyContent: "center",
+		alignItems: "center",
+	},
+	button: {
+		minWidth: 100,
 		marginHorizontal: 10,
 	},
 });
