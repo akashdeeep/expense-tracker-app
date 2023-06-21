@@ -22,20 +22,11 @@ export default ManageExpenses = (props) => {
 		console.log("Cancel");
 		props.navigation.goBack();
 	};
-	confirmHandler = () => {
+	confirmHandler = (expenseData) => {
 		if (isEditing) {
-			expensesCtx.updateExpense(editedExpenseId, {
-				description: "Test",
-				amount: 12.99,
-				date: new Date(),
-			});
+			expensesCtx.updateExpense(editedExpenseId, expenseData);
 		} else {
-			expensesCtx.addExpense({
-				id: new Date().toString() + Math.random(),
-				description: "Test",
-				amount: 12.99,
-				date: new Date(),
-			});
+			expensesCtx.addExpense(expenseData);
 		}
 		props.navigation.goBack();
 	};
@@ -48,6 +39,7 @@ export default ManageExpenses = (props) => {
 		<View style={styles.container}>
 			<ExpenseForm
 				onCancel={cancelHandler}
+				onSubmit={confirmHandler}
 				submitButtonLabel={isEditing ? "Update" : "Add"}
 			/>
 

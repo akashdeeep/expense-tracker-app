@@ -53,17 +53,7 @@ function Input(props) {
 	return (
 		<View style={[styles2.inputContainer, props.style]}>
 			<Text style={styles2.label}>{props.label}</Text>
-			<TextInput
-				{...props.textInputConfig}
-				style={inputStyles}
-				value={text}
-				onChangeText={textChangeHandler}
-				onFocus={focusHandler}
-				onBlur={blurHandler}
-				onTouchStart={touchHandler}
-				onTouchEnd={dirtyHandler}
-				onEndEditing={validHandler}
-			/>
+			<TextInput {...props.textInputConfig} style={inputStyles} />
 		</View>
 	);
 }

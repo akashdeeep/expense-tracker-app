@@ -30,14 +30,22 @@ export default ExpenseForm = (props) => {
 		description: false,
 	});
 
-	inputChangeHandler = (inputIdentifier, inputValue) => {
+	const inputChangeHandler = (inputIdentifier, inputValue) => {
 		setInputValues((prevState) => ({
 			...prevState,
 			[inputIdentifier]: inputValue,
 		}));
-	};
-	submitHandler = () => {
 		console.log(inputValues);
+	};
+
+	const submitHandler = () => {
+		const expenseData = {
+			amount: +inputValues.amount,
+			date: new Date(inputValues.date),
+			description: inputValues.description,
+		};
+		console.log(expenseData);
+		props.onSubmit(expenseData);
 	};
 
 	return (
@@ -50,7 +58,7 @@ export default ExpenseForm = (props) => {
 					textInputConfig={{
 						value: inputValues.amount,
 						onChangeText: inputChangeHandler.bind(this, "amount"),
-						placeholder: "0",
+						keyboardType: "decimal-pad",
 					}}
 				/>
 				<Input
@@ -59,7 +67,7 @@ export default ExpenseForm = (props) => {
 					textInputConfig={{
 						value: inputValues.date,
 						onChangeText: inputChangeHandler.bind(this, "date"),
-						placeholder: "DD/MM/YYYY",
+						placeholder: "YYYY-MM-DD",
 						maxLength: 10,
 					}}
 				/>
