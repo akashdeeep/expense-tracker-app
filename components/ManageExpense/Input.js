@@ -49,10 +49,15 @@ function Input(props) {
 	const validHandler = () => {
 		setIsValid(true);
 	};
+	if (props.invalid) {
+		inputStyles.push(styles2.invalidInput);
+	}
 
 	return (
 		<View style={[styles2.inputContainer, props.style]}>
-			<Text style={styles2.label}>{props.label}</Text>
+			<Text style={[styles2.label, props.invalid && styles2.invalidLabel]}>
+				{props.label}
+			</Text>
 			<TextInput {...props.textInputConfig} style={inputStyles} />
 		</View>
 	);
@@ -80,5 +85,11 @@ styles2 = StyleSheet.create({
 	},
 	multilineInput: {
 		height: 100,
+	},
+	invalidLabel: {
+		color: GlobalStyles.colors.error600,
+	},
+	invalidInput: {
+		borderBottomColor: GlobalStyles.colors.error600,
 	},
 });

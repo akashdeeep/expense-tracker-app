@@ -94,6 +94,7 @@ export default ExpenseForm = (props) => {
 				<Input
 					style={styles.rowInput}
 					label="Amount"
+					invalid={!inputs.amount.isValid}
 					textInputConfig={{
 						value: inputs.amount.value,
 						onChangeText: inputChangeHandler.bind(this, "amount"),
@@ -103,6 +104,7 @@ export default ExpenseForm = (props) => {
 				<Input
 					style={styles.rowInput}
 					label="Date"
+					invalid={!inputs.date.isValid}
 					textInputConfig={{
 						value: inputs.date.value,
 						onChangeText: inputChangeHandler.bind(this, "date"),
@@ -115,6 +117,7 @@ export default ExpenseForm = (props) => {
 				<Input
 					style={styles.rowInput}
 					label="Description"
+					invalid={!inputs.description.isValid}
 					textInputConfig={{
 						value: inputs.description.value,
 						onChangeText: inputChangeHandler.bind(this, "description"),
@@ -124,9 +127,7 @@ export default ExpenseForm = (props) => {
 				/>
 			</View>
 			{formIsInvalid && (
-				<Text style={{ color: "red", textAlign: "center" }}>
-					Please enter valid values
-				</Text>
+				<Text style={styles.errorText}>Please enter valid values</Text>
 			)}
 			<View style={styles.buttonContainer}>
 				<Button style={styles.button} mode="flat" onPress={props.onCancel}>
@@ -170,5 +171,10 @@ styles = StyleSheet.create({
 	button: {
 		minWidth: 100,
 		marginHorizontal: 10,
+	},
+	errorText: {
+		color: GlobalStyles.colors.error600,
+		textAlign: "center",
+		margin: 10,
 	},
 });
