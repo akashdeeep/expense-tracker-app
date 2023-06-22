@@ -1,5 +1,5 @@
 import { useState, useLayoutEffect } from "react";
-import { View, StyleSheet, TextInput, Text } from "react-native";
+import { View, StyleSheet, TextInput, Text, Alert } from "react-native";
 import { GlobalStyles } from "../../constants/GlobalStyles";
 import Input from "./Input";
 import Button from "../UI/Button";
@@ -44,7 +44,19 @@ export default ExpenseForm = (props) => {
 			date: new Date(inputValues.date),
 			description: inputValues.description,
 		};
-		console.log(expenseData);
+
+		const isAmountValid = !isNaN(expenseData.amount) && expenseData.amount > 0;
+		const isDateValid = !isNaN(expenseData.date.getTime());
+		const isDescriptionValid = expenseData.description.trim().length > 0;
+
+		if (!isAmountValid || !isDateValid || !isDescriptionValid) {
+			console.log("Invalid input");
+			Alert.alert("Invalid input", "Please check your input values.", [
+				{ text: "Okay", style: "destructive" },
+			]);
+			return;
+		}
+
 		props.onSubmit(expenseData);
 	};
 
