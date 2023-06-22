@@ -12,6 +12,10 @@ export default ManageExpenses = (props) => {
 	const isEditing = !!editedExpenseId;
 	const expensesCtx = useContext(ExpensesContext);
 
+	const selectedExpense = expensesCtx.expenses.find(
+		(expense) => expense.id === editedExpenseId
+	);
+
 	useLayoutEffect(() => {
 		props.navigation.setOptions({
 			title: isEditing ? "Edit Expense" : "Add Expense",
@@ -41,6 +45,7 @@ export default ManageExpenses = (props) => {
 				onCancel={cancelHandler}
 				onSubmit={confirmHandler}
 				submitButtonLabel={isEditing ? "Update" : "Add"}
+				defaultValues={isEditing ? selectedExpense : null}
 			/>
 
 			{isEditing && (

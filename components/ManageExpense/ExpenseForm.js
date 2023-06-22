@@ -7,9 +7,9 @@ import Button from "../UI/Button";
 export default ExpenseForm = (props) => {
 	// console.log(props);
 	const [inputValues, setInputValues] = useState({
-		amount: "",
-		date: "",
-		description: "",
+		amount: props.defaultValues ? props.defaultValues.amount.toString() : "",
+		date: props.defaultValues ? props.defaultValues.date.toISOString() : "",
+		description: props.defaultValues ? props.defaultValues.description : "",
 	});
 
 	const [isFocused, setIsFocused] = useState({
