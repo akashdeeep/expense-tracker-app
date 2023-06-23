@@ -4,17 +4,26 @@ import { ExpensesContext } from "../store/expenses-context";
 import ExpensesOutput from "../components/ExpensesOutput/ExpensesOutput";
 import { fetchExpenses } from "../util/http";
 import { get } from "react-native/Libraries/TurboModule/TurboModuleRegistry";
+import LoadingOverlay from "../components/UI/LoadingOverlay";
 
 export default RecentExpenses = (props) => {
+	const [isFetching, setIsFetching] = useState(true);
+
 	const expensesCtx = useContext(ExpensesContext);
 
 	useEffect(() => {
 		async function getExpenses() {
+			setIsFetching(true);
 			const expenses = await fetchExpenses();
+			setIsFetching(false);
 			expensesCtx.setExpenses(expenses);
 		}
 		getExpenses();
 	}, []);
+
+	if (isFetching) {
+		return <LoadingOverlay />;
+	}
 
 	const RecentExpenses = expensesCtx.expenses.filter((expense) => {
 		const expenseDate = new Date(expense.date);
