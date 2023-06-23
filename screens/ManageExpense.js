@@ -6,6 +6,7 @@ import { GlobalStyles } from "../constants/GlobalStyles";
 import { useContext } from "react";
 import { ExpensesContext } from "../store/expenses-context";
 import ExpenseForm from "../components/ManageExpense/ExpenseForm";
+import storeExpense from "../util/http";
 
 export default ManageExpenses = (props) => {
 	const editedExpenseId = props.route.params?.expenseId;
@@ -30,6 +31,7 @@ export default ManageExpenses = (props) => {
 		if (isEditing) {
 			expensesCtx.updateExpense(editedExpenseId, expenseData);
 		} else {
+			storeExpense(expenseData);
 			expensesCtx.addExpense(expenseData);
 		}
 		props.navigation.goBack();
