@@ -11,17 +11,13 @@ export const ExpensesContext = createContext({
 expensesReducer = (state, action) => {
 	switch (action.type) {
 		case "ADD":
-			const id = new Date().getTime().toString() + Math.random().toString();
-			const newExpense = {
-				id,
-				description: action.expense.description,
-				amount: action.expense.amount,
-				date: action.expense.date,
-			};
-			return [...state, newExpense];
+			return [action.expense, ...state];
 
 		case "SET":
-			return action.expenses;
+			const sortedByDateExpenses = action.expenses.sort((a, b) => {
+				return new Date(b.date) - new Date(a.date);
+			});
+			return sortedByDateExpenses;
 		case "DELETE":
 			return state.filter((expense) => expense.id !== action.id);
 

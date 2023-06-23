@@ -6,7 +6,7 @@ import { GlobalStyles } from "../constants/GlobalStyles";
 import { useContext } from "react";
 import { ExpensesContext } from "../store/expenses-context";
 import ExpenseForm from "../components/ManageExpense/ExpenseForm";
-import { storeExpense } from "../util/http";
+import { storeExpense, updateExpense, deleteExpense } from "../util/http";
 
 export default ManageExpenses = (props) => {
 	const editedExpenseId = props.route.params?.expenseId;
@@ -27,19 +27,24 @@ export default ManageExpenses = (props) => {
 		console.log("Cancel");
 		props.navigation.goBack();
 	};
-	confirmHandler = (expenseData) => {
+	async function confirmHandler(expenseData) {
 		if (isEditing) {
 			expensesCtx.updateExpense(editedExpenseId, expenseData);
+			await updateExpense(editedExpenseId, expenseData);
 		} else {
-			storeExpense(expenseData);
-			expensesCtx.addExpense(expenseData);
+			const id = await storeExpense(expenseData);
+			expensesCtx.addExpense({
+				id: id,
+				...expenseData,
+			});
 		}
 		props.navigation.goBack();
-	};
-	deleteHandler = () => {
+	}
+	async function deleteHandler() {
+		await deleteExpense(editedExpenseId);
 		expensesCtx.deleteExpense(editedExpenseId);
 		props.navigation.goBack();
-	};
+	}
 
 	return (
 		<View style={styles.container}>
