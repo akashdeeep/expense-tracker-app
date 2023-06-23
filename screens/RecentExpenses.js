@@ -6,18 +6,17 @@ import { fetchExpenses } from "../util/http";
 import { get } from "react-native/Libraries/TurboModule/TurboModuleRegistry";
 
 export default RecentExpenses = (props) => {
-	// const expensesCtx = useContext(ExpensesContext);
-	const [fetchedExpenses, setFetchedExpenses] = useState([]);
+	const expensesCtx = useContext(ExpensesContext);
 
 	useEffect(() => {
 		async function getExpenses() {
 			const expenses = await fetchExpenses();
-			setFetchedExpenses(expenses);
+			expensesCtx.setExpenses(expenses);
 		}
 		getExpenses();
 	}, []);
 
-	const RecentExpenses = fetchedExpenses.filter((expense) => {
+	const RecentExpenses = expensesCtx.expenses.filter((expense) => {
 		const expenseDate = new Date(expense.date);
 		const today = new Date();
 		const daysAgo = new Date(today.setDate(today.getDate() - 7));
